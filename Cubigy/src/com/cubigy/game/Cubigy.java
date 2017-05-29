@@ -14,6 +14,7 @@ import java.lang.reflect.InvocationTargetException;
 
 import javax.imageio.ImageIO;
 
+import com.cubigy.audio.Jukebox;
 import com.cubigy.gui.ClickableGUI;
 import com.cubigy.gui.Widget;
 import com.cubigy.mods.Mod;
@@ -43,11 +44,14 @@ public class Cubigy {
 	
 	public Cubigy(Window window) throws IOException {
 		Cubigy.instance = this;
-		
+		Jukebox.initSongs();
+		Jukebox jb = new Jukebox();
 		this.window = window;
 		this.mloader = new ModLoader();
 		this.vsettings = new VideoSettings();
 		this.background = new BufferedImage(window.getWidth(), window.getHeight(), BufferedImage.TYPE_INT_RGB);
+		
+		jb.start();
 		
 		for (int h = 0; h < background.getHeight(); h++) {
 			for (int w = 0; w < background.getWidth(); w++) {

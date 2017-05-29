@@ -121,7 +121,7 @@ public class Unit {
 	public void update() {
 		draw(Cubigy.getInstance().background.getGraphics());
 		
-		if (isSelected() && Cubigy.getInstance().input.mouseEvent != null) {
+		if (isSelected() && Cubigy.getInstance().input.mouseEvent != null && Cubigy.getInstance().input.mouseEvent.getButton() == 3) {
 			setX(Cubigy.getInstance().input.mouseEvent.getX());
 			setY(Cubigy.getInstance().input.mouseEvent.getY());
 			setDisplayX(Cubigy.getInstance().input.mouseEvent.getX());

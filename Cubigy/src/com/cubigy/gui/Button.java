@@ -10,7 +10,7 @@ public class Button extends TextDisplay implements ClickableGUI {
 
 	@Override
 	public void onClick() {
-		System.out.println("A");
+		
 	}
 	
 	@Override
