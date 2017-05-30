@@ -11,6 +11,8 @@ public @interface Cubimod {
 	
 	public String id();
 	public String name();
+	public String[] authors();
+	public String description() default "No Description";
 	public ModType type() default ModType.FEATURES;
 	
 }

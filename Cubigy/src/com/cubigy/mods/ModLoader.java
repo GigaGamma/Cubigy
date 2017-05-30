@@ -10,11 +10,13 @@ import java.util.HashMap;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
+import com.cubigy.debug.ModInitException;
+
 public class ModLoader {
 	
 	public static ArrayList<Mod> mods = new ArrayList<Mod>();
 	
-	public void load_mods() {
+	public void load_mods() throws ModInitException {
 		try {
 			if (new File("mods").exists()) {
 				File[] mods = new File("mods").listFiles();
@@ -49,15 +51,15 @@ public class ModLoader {
 							try {
 								//c.getConstructor(argTypes).newInstance(args);
 								this.mods.add(new Mod(c, c.newInstance()));
-								System.out.println("Loaded mod: '" + ((Cubimod) c.getAnnotation(Cubimod.class)).id()  + "'");
-							} catch (Exception e2) {e2.printStackTrace();} 
+								System.out.println("Loaded mod: '" + ModDataExtractor.getModAnnotation(c).id()  + "'");
+							} catch (Exception e2) {throw new ModInitException(ModDataExtractor.getModAnnotation(c).name());} 
 						}
 					}
 				}
 			} else {
 				System.out.println("No 'mods' directory found");
 			}
-		} catch (Exception e) {e.printStackTrace();}
+		} catch (Exception e) {throw new ModInitException("game");}
 		
 		
 	}

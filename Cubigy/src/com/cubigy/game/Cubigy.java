@@ -15,7 +15,10 @@ import java.lang.reflect.InvocationTargetException;
 import javax.imageio.ImageIO;
 
 import com.cubigy.audio.Jukebox;
+import com.cubigy.debug.ModInitException;
 import com.cubigy.gui.ClickableGUI;
+import com.cubigy.gui.Menu;
+import com.cubigy.gui.Screen;
 import com.cubigy.gui.Widget;
 import com.cubigy.mods.Mod;
 import com.cubigy.mods.ModLoader;
@@ -38,20 +41,21 @@ public class Cubigy {
 	public VideoSettings vsettings;
 	public BufferedImage background;
 	public InputHandler input;
+	public Jukebox jb;
 	public long time;
+	public Screen currentScreen;
 	
 	protected boolean isRunning = false;
 	
 	public Cubigy(Window window) throws IOException {
 		Cubigy.instance = this;
 		Jukebox.initSongs();
-		Jukebox jb = new Jukebox();
+		this.jb = new Jukebox();
 		this.window = window;
 		this.mloader = new ModLoader();
 		this.vsettings = new VideoSettings();
 		this.background = new BufferedImage(window.getWidth(), window.getHeight(), BufferedImage.TYPE_INT_RGB);
-		
-		jb.start();
+		this.currentScreen = new Menu(background.getGraphics());
 		
 		for (int h = 0; h < background.getHeight(); h++) {
 			for (int w = 0; w < background.getWidth(); w++) {
@@ -65,7 +69,12 @@ public class Cubigy {
 		
 		window.getGraphics().drawImage(background, 0, 0, window);
 		
-		mloader.load_mods();
+		try {
+			mloader.load_mods();
+		} catch (ModInitException e1) {
+			System.out.println(e1);
+		}
+		jb.start();
 		
 		new CapitalSquare(300, 300);
 		new Barbarian(500, 500);
@@ -102,15 +111,15 @@ public class Cubigy {
 		if (input.isKeyDown(KeyEvent.VK_ESCAPE) && Cubigy.devmode) {
 			System.exit(0);
 		}
+		currentScreen.update();
 	}
 	
 	void draw() {
 		Graphics g = background.getGraphics();
 		window.getGraphics().drawImage(background, 0, 0, window);
 		g.clearRect(0, 0, window.getWidth(), window.getHeight());
-		// if blue, error
 		
-		//Camera.move(5, 0);
+		/*
 		
 		for (Square s : Square.squares) {
 			s.update();
@@ -120,9 +129,9 @@ public class Cubigy {
 		}
 		for (Widget w : Widget.widgets) {
 			w.update();
-		}
-		
-		new Vignetting(g).draw();
+		}*/
+
+		currentScreen.draw();
 	}
 	
 	public static Cubigy getInstance() {

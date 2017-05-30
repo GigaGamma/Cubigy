@@ -12,15 +12,18 @@ public class Jukebox extends Thread {
 	public void run() {
 		int i = 0;
 		while (true) {
-			if (!songs.get(i).isActive()) {
+			if (songs.get(i) != null && !songs.get(i).isActive()) {
 				if (i != 0) {i++;}
 				songs.get(i).start();
+			}
+			else if (songs.get(i) == null) {
+				i = 0;
 			}
 		}
 	}
 	
 	public static void initSongs() {
-		songs.add(SoundPlayer.playSound("audio/music/feelingsremix.wav"));
+		songs.add(SoundPlayer.playSound("audio/music/feelings.wav"));
 	}
 	
 }
