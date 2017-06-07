@@ -7,13 +7,14 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 
 import com.cubigy.game.Cubigy;
+import com.cubigy.game.Team;
 
 public class CapitalSquare extends Square {
 	
 	private static BufferedImage img;
 	
-	public CapitalSquare(int x, int y) {
-		super("Capital", x, y);
+	public CapitalSquare(int x, int y, Team team) {
+		super("Capital", x, y, team);
 		
 		if (CapitalSquare.img == null) {try {CapitalSquare.img = ImageIO.read(ClassLoader.getSystemResource("images/star.png"));} catch (IOException e) {e.printStackTrace();}}
 		

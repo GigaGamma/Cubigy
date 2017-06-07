@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.util.ArrayList;
 
 import com.cubigy.game.Cubigy;
+import com.cubigy.game.Team;
 import com.cubigy.gui.Button;
 import com.cubigy.gui.TextDisplay;
 
@@ -21,12 +22,15 @@ public class Square {
 	private TextDisplay text;
 	private Button opengui;
 	
-	public Square(String name, int x, int y) {
+	private Team team;
+	
+	public Square(String name, int x, int y, Team team) {
 		setX(x);
 		setY(y);
 		setDisplayX(x);
 		setDisplayY(y);
 		setName(name);
+		setTeam(team);
 		squares.add(this);
 		
 		setText(new TextDisplay(getName(), getDisplayX() + 10, getDisplayY()));
@@ -81,6 +85,14 @@ public class Square {
 		this.text = text;
 	}
 
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
 	public void update() {
 		draw(Cubigy.getInstance().background.getGraphics());
 		if (isSelected()) {
@@ -115,7 +127,9 @@ public class Square {
 		opengui.setDisplayY(getDisplayY() + getText().getHeight() + 20);
 		
 		getText().draw(Cubigy.getInstance().background.getGraphics());
-		opengui.draw(Cubigy.getInstance().background.getGraphics());
+		if (getTeam() == Cubigy.getInstance().team) {
+			opengui.draw(Cubigy.getInstance().background.getGraphics());
+		}
 	}
 	
 }

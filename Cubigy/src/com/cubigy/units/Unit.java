@@ -1,10 +1,13 @@
 package com.cubigy.units;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 
 import com.cubigy.game.Cubigy;
+import com.cubigy.game.Team;
 
 public class Unit {
 	
@@ -24,7 +27,9 @@ public class Unit {
 	private Color color;
 	private boolean selected = false;
 	
-	public Unit(String name, int x, int y, float maxHealth, Color color) {
+	private Team team;
+	
+	public Unit(String name, int x, int y, float maxHealth, Color color, Team team) {
 		setName(name);
 		setX(x);
 		setY(y);
@@ -34,6 +39,7 @@ public class Unit {
 		setHeight(15);
 		setMaxHealth(maxHealth);
 		setColor(color);
+		setTeam(team);
 		
 		units.add(this);
 	}
@@ -118,20 +124,33 @@ public class Unit {
 		this.color = color;
 	}
 	
+	public Team getTeam() {
+		return team;
+	}
+
+	public void setTeam(Team team) {
+		this.team = team;
+	}
+
 	public void update() {
 		draw(Cubigy.getInstance().background.getGraphics());
 		
-		if (isSelected() && Cubigy.getInstance().input.mouseEvent != null && Cubigy.getInstance().input.mouseEvent.getButton() == 3) {
-			setX(Cubigy.getInstance().input.mouseEvent.getX());
-			setY(Cubigy.getInstance().input.mouseEvent.getY());
+		if (isSelected() && Cubigy.getInstance().input.mouseEvent != null && Cubigy.getInstance().input.mouseEvent.getX() != getDisplayX() && Cubigy.getInstance().input.mouseEvent.getButton() == 3 && getTeam() == Cubigy.getInstance().team) {
+			setX(getX() + (Cubigy.getInstance().input.mouseEvent.getX() - getDisplayX()));
+			setX(getY() + (Cubigy.getInstance().input.mouseEvent.getY() - getDisplayY()));
 			setDisplayX(Cubigy.getInstance().input.mouseEvent.getX());
 			setDisplayY(Cubigy.getInstance().input.mouseEvent.getY());
 		}
 	}
 	
 	public void draw(Graphics g) {
-		g.setColor(getColor());
-		g.drawOval(getDisplayX(), getDisplayY(), 15, 15);
+		Graphics2D g2d = (Graphics2D) g;
+		g2d.setColor(Cubigy.getInstance().team.getColor());
+		g2d.setStroke(new BasicStroke(10));
+		g2d.drawOval(getDisplayX(), getDisplayY(), 15, 15);
+		g2d.setStroke(new BasicStroke(1));
+		g2d.setColor(getColor());
+		g2d.fillOval(getDisplayX(), getDisplayY(), 15, 15);
 	}
 	
 	public void select() {

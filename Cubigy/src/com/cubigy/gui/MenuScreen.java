@@ -4,6 +4,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 import com.cubigy.game.Cubigy;
+import com.cubigy.worlds.World;
 
 public class MenuScreen extends Screen {
 	
@@ -15,7 +16,7 @@ public class MenuScreen extends Screen {
 		this.quickmatch = new Button("Quick Match", 200, 300) {
 			@Override
 			public void onClick() {
-				Cubigy.getInstance().currentScreen = new GameScreen(g);
+				Cubigy.getInstance().currentScreen = new GameScreen(g, new World());
 			}
 		};
 		this.quickmatch.setFont(new Font(this.quickmatch.getFont().getFontName(), Font.PLAIN, 200));

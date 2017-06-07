@@ -12,7 +12,7 @@ public class Window extends JFrame {
 	public void init() throws IOException {
 		setExtendedState(MAXIMIZED_BOTH); 
 		setUndecorated(true);
-		//setSize(2000, 2000);
+		setSize(2000, 2000);
 		setResizable(false);
 		
 		setIconImage(ImageIO.read(ClassLoader.getSystemResource("images/logo.png")));

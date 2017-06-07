@@ -22,6 +22,8 @@ import com.cubigy.gui.Screen;
 import com.cubigy.gui.Widget;
 import com.cubigy.mods.Mod;
 import com.cubigy.mods.ModLoader;
+import com.cubigy.networking.LocalServer;
+import com.cubigy.networking.Server;
 import com.cubigy.settings.VideoSettings;
 import com.cubigy.squares.CapitalSquare;
 import com.cubigy.squares.Square;
@@ -30,6 +32,7 @@ import com.cubigy.units.Unit;
 import com.cubigy.util.Camera;
 import com.cubigy.util.InputHandler;
 import com.cubigy.util.effects.Vignetting;
+import com.cubigy.worlds.World;
 
 public class Cubigy {
 	
@@ -44,6 +47,7 @@ public class Cubigy {
 	public Jukebox jb;
 	public long time;
 	public Screen currentScreen;
+	public Team team;
 	
 	protected boolean isRunning = false;
 	
@@ -56,6 +60,7 @@ public class Cubigy {
 		this.vsettings = new VideoSettings();
 		this.background = new BufferedImage(window.getWidth(), window.getHeight(), BufferedImage.TYPE_INT_RGB);
 		this.currentScreen = new MenuScreen(background.getGraphics());
+		this.team = Team.BLUE;
 		
 		for (int h = 0; h < background.getHeight(); h++) {
 			for (int w = 0; w < background.getWidth(); w++) {
@@ -76,8 +81,8 @@ public class Cubigy {
 		}
 		jb.start();
 		
-		new CapitalSquare(300, 300);
-		new Barbarian(500, 500);
+		//new CapitalSquare(300, 300, Team.BLUE);
+		//new Barbarian(500, 500, Team.BLUE);
 		//new CapitalSquare(0, 0);
 		//Camera.move(1, 0);
 		
