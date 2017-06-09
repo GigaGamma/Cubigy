@@ -7,6 +7,11 @@ import java.awt.geom.AffineTransform;
 
 public class TextDisplay extends Widget {
 
+	/**
+	 * @author Auguste Rame
+	 */
+	private static final long serialVersionUID = -4596172546038328650L;
+	
 	private String[] text;
 	private Font font = new Font("Calibri", Font.PLAIN, 20);
 	

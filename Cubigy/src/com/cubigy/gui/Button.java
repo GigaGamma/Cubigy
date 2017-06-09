@@ -4,6 +4,11 @@ import java.awt.Graphics;
 
 public class Button extends TextDisplay implements ClickableGUI {
 	
+	/**
+	 * @author Auguste Rame
+	 */
+	private static final long serialVersionUID = -6673448231928422325L;
+
 	public Button(String text, int displayX, int displayY) {
 		super(text, displayX, displayY);
 	}

@@ -1,8 +1,6 @@
 package com.cubigy.networking.packets;
 
-import java.io.Serializable;
-
-public class ChatPacket implements Serializable {
+public class ChatPacket extends Packet {
 	
 	/**
 	 * @author Auguste Rame

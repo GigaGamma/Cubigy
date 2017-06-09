@@ -1,21 +1,26 @@
 package com.cubigy.squares;
 
 import java.awt.Graphics;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.cubigy.game.Cubigy;
 import com.cubigy.game.Team;
 import com.cubigy.gui.Button;
+import com.cubigy.gui.GameScreen;
 import com.cubigy.gui.TextDisplay;
 
-public class Square {
+public class Square implements Serializable {
 	
+	/**
+	 * @author Auguste Rame
+	 */
+	private static final long serialVersionUID = -6231753471823858435L;
+
 	public static ArrayList<Square> squares = new ArrayList<Square>();
 	
 	private int x;
 	private int y;
-	private int displayX;
-	private int displayY;
 	
 	private boolean selected = false;
 	private String name;
@@ -27,14 +32,12 @@ public class Square {
 	public Square(String name, int x, int y, Team team) {
 		setX(x);
 		setY(y);
-		setDisplayX(x);
-		setDisplayY(y);
 		setName(name);
 		setTeam(team);
 		squares.add(this);
 		
-		setText(new TextDisplay(getName(), getDisplayX() + 10, getDisplayY()));
-		opengui = new Button("Manage", getDisplayX() + 55, getDisplayY() + getText().getHeight() + 20);
+		setText(new TextDisplay(getName(), getX() + GameScreen.xOffset + 10, getY() + GameScreen.yOffset));
+		opengui = new Button("Manage", getX() + GameScreen.xOffset + 55, getY() + GameScreen.yOffset + getText().getHeight() + 20);
 	}
 	
 	public int getX() {
@@ -51,22 +54,6 @@ public class Square {
 
 	public void setY(int y) {
 		this.y = y;
-	}
-	
-	public int getDisplayX() {
-		return displayX;
-	}
-
-	public void setDisplayX(int displayX) {
-		this.displayX = displayX;
-	}
-
-	public int getDisplayY() {
-		return displayY;
-	}
-
-	public void setDisplayY(int displayY) {
-		this.displayY = displayY;
 	}
 	
 	public String getName() {
@@ -121,10 +108,10 @@ public class Square {
 	}
 	
 	public void onSquareSelect() {
-		getText().setDisplayX(getDisplayX() + 55);
-		getText().setDisplayY(getDisplayY() + 5);
-		opengui.setDisplayX(getDisplayX() + 55);
-		opengui.setDisplayY(getDisplayY() + getText().getHeight() + 20);
+		getText().setDisplayX(getX() + GameScreen.xOffset + 55);
+		getText().setDisplayY(getY() + GameScreen.yOffset + 5);
+		opengui.setDisplayX(getX() + GameScreen.xOffset + 55);
+		opengui.setDisplayY(getY() + GameScreen.yOffset + getText().getHeight() + 20);
 		
 		getText().draw(Cubigy.getInstance().background.getGraphics());
 		if (getTeam() == Cubigy.getInstance().team) {

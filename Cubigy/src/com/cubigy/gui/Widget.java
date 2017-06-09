@@ -1,12 +1,18 @@
 package com.cubigy.gui;
 
 import java.awt.Graphics;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.cubigy.game.Cubigy;
 
-public class Widget {
+public class Widget implements Serializable {
 	
+	/**
+	 * @author Auguste Rame
+	 */
+	private static final long serialVersionUID = 4453910033742336032L;
+
 	public static ArrayList<Widget> widgets = new ArrayList<Widget>();
 	
 	private int displayX;

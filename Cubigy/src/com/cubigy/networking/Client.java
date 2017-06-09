@@ -18,6 +18,8 @@ import io.netty.util.concurrent.EventExecutorGroup;
 
 public class Client {
 	
+	public ClientHandler handler;
+	
 	private String ip;
 	private int port = 19127;
 	
@@ -36,6 +38,8 @@ public class Client {
 		b.group(worker);
 		b.channel(NioSocketChannel.class);
 		
+		handler = new ClientHandler();
+		
 		b.handler(new ChannelInitializer<SocketChannel>() {
 
 			@Override
@@ -43,7 +47,7 @@ public class Client {
 				ch.pipeline().addLast(new ObjectEncoder());
 				ch.pipeline().addLast(new ObjectDecoder(ClassResolvers.cacheDisabled(getClass().getClassLoader())));
 				
-				ch.pipeline().addLast(new ClientHandler());
+				ch.pipeline().addLast(handler);
 			}
 			
 		});

@@ -1,6 +1,7 @@
 package com.cubigy.networking;
 
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
 import io.netty.channel.ChannelPipeline;
@@ -17,6 +18,8 @@ import io.netty.util.concurrent.DefaultEventExecutorGroup;
 import io.netty.util.concurrent.EventExecutorGroup;
 
 public class Server {
+	
+	public Channel channel;
 	
 	private int port = 19127;
 	
@@ -50,13 +53,13 @@ public class Server {
 		});
 		
 		bootstrap.childOption(ChannelOption.SO_KEEPALIVE, true);
-		bootstrap.bind(getPort()).sync();
+		channel = bootstrap.bind(getPort()).sync().channel();
 	}
 	
 	public int getPort() {
 		return port;
 	}
-
+	
 	public void setPort(int port) {
 		this.port = port;
 	}

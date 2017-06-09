@@ -8,6 +8,7 @@ import javax.imageio.ImageIO;
 
 import com.cubigy.game.Cubigy;
 import com.cubigy.game.Team;
+import com.cubigy.gui.GameScreen;
 
 public class CapitalSquare extends Square {
 	
@@ -18,7 +19,7 @@ public class CapitalSquare extends Square {
 		
 		if (CapitalSquare.img == null) {try {CapitalSquare.img = ImageIO.read(ClassLoader.getSystemResource("images/star.png"));} catch (IOException e) {e.printStackTrace();}}
 		
-		getText().setText(new String[] {"Capital", "", "The capital is the most important square."});
+		getText().setText(new String[] {"Capital", "", "The capital is the most important square, don't lose it.", "", "If you lose the capital, then it's game over."});
 	}
 
 	@Override
@@ -42,7 +43,7 @@ public class CapitalSquare extends Square {
 		g.setColor(Color.WHITE);
 		g.fillPolygon(X, Y, nPoints);*/
 		
-		g.drawImage(CapitalSquare.img, getDisplayX(), getDisplayY(), 50, 50, null);
+		g.drawImage(CapitalSquare.img, getX() + GameScreen.xOffset, getY() + GameScreen.yOffset, 50, 50, null);
 	}
 	
 	@Override

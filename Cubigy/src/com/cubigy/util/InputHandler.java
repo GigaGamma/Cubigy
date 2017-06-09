@@ -4,6 +4,7 @@ import java.awt.Component;
 import java.awt.event.*;
 
 import com.cubigy.gui.ClickableGUI;
+import com.cubigy.gui.GameScreen;
 import com.cubigy.gui.Widget;
 import com.cubigy.squares.Square;
 import com.cubigy.units.Unit;
@@ -64,13 +65,13 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
 		if (e.getButton() == 1) { // Right
 			for (Square s : Square.squares) {
 				s.deselect();
-				if (e.getX() > s.getDisplayX() && e.getY() > s.getDisplayY() && e.getX() < s.getDisplayX() + 50 && e.getY() < s.getDisplayY() + 50) {
+				if (e.getX() > s.getX() + GameScreen.xOffset && e.getY() > s.getY() + GameScreen.yOffset && e.getX() < s.getX() + GameScreen.xOffset + 50 && e.getY() < s.getY() + GameScreen.yOffset + 50) {
 					s.select();
 				}
 			}
 			for (Unit u : Unit.units) {
 				u.deselect();
-				if (e.getX() > u.getDisplayX() && e.getY() > u.getDisplayY() && e.getX() < u.getDisplayX() + u.getWidth() && e.getY() < u.getDisplayY() + u.getHeight()) {
+				if (e.getX() > u.getX() + GameScreen.xOffset && e.getY() > u.getY() + GameScreen.yOffset && e.getX() < u.getX() + GameScreen.xOffset + u.getWidth() && e.getY() < u.getY() + GameScreen.yOffset + u.getHeight()) {
 					u.select();
 				}
 			}
@@ -78,6 +79,7 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
 				if (w instanceof ClickableGUI) {
 					if (e.getX() > w.getDisplayX() && e.getY() > w.getDisplayY() && e.getX() < w.getDisplayX() + w.getWidth() && e.getY() < w.getDisplayY() + w.getHeight()) {
 						((ClickableGUI) w).onClick();
+						break;
 					}
 				}
 			}
@@ -91,13 +93,13 @@ public class InputHandler implements KeyListener, MouseListener, MouseMotionList
 
 	@Override
 	public void mouseDragged(MouseEvent e) {
-		xdif = -(ox - e.getX());
-		ydif = -(oy - e.getY());
+		xdif = (e.getX() - (ox + 1));
+		ydif = (e.getY() - (oy + 1));
 		ox = mouseEvent.getX();
 		oy = mouseEvent.getY();
 		
 		if (mouseEvent.getButton() == 2) { // Center
-			Camera.move(xdif / 10, ydif / 10);
+			Camera.move(xdif / 50, ydif / 50);
 		}
 	}
 

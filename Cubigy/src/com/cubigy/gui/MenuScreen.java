@@ -16,7 +16,8 @@ public class MenuScreen extends Screen {
 		this.quickmatch = new Button("Quick Match", 200, 300) {
 			@Override
 			public void onClick() {
-				Cubigy.getInstance().currentScreen = new GameScreen(g, new World());
+				Cubigy.getInstance().currentScreen = new GameScreen(g, true);
+				widgets.clear();
 			}
 		};
 		this.quickmatch.setFont(new Font(this.quickmatch.getFont().getFontName(), Font.PLAIN, 200));
@@ -24,6 +25,7 @@ public class MenuScreen extends Screen {
 			@Override
 			public void onClick() {
 				Cubigy.getInstance().currentScreen = new Screen(g);
+				widgets.clear();
 			}
 		};
 		this.multiplayer.setFont(new Font(this.multiplayer.getFont().getFontName(), Font.PLAIN, 200));

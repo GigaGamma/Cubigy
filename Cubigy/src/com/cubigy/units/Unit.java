@@ -4,13 +4,22 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.cubigy.game.Cubigy;
 import com.cubigy.game.Team;
+import com.cubigy.gui.GameScreen;
+import com.cubigy.networking.packets.ChatPacket;
+import com.cubigy.networking.packets.WorldPacket;
 
-public class Unit {
+public class Unit implements Serializable {
 	
+	/**
+	 * @author Auguste Rame
+	 */
+	private static final long serialVersionUID = -4849449703316186540L;
+
 	public static ArrayList<Unit> units = new ArrayList<Unit>();
 	
 	private String name;
@@ -19,8 +28,6 @@ public class Unit {
 	
 	private int x;
 	private int y;
-	private int displayX;
-	private int displayY;
 	private int width;
 	private int height;
 	
@@ -33,8 +40,6 @@ public class Unit {
 		setName(name);
 		setX(x);
 		setY(y);
-		setDisplayX(x);
-		setDisplayY(y);
 		setWidth(15);
 		setHeight(15);
 		setMaxHealth(maxHealth);
@@ -83,22 +88,6 @@ public class Unit {
 	public void setY(int y) {
 		this.y = y;
 	}
-	
-	public int getDisplayX() {
-		return displayX;
-	}
-
-	public void setDisplayX(int displayX) {
-		this.displayX = displayX;
-	}
-
-	public int getDisplayY() {
-		return displayY;
-	}
-
-	public void setDisplayY(int displayY) {
-		this.displayY = displayY;
-	}
 
 	public int getWidth() {
 		return width;
@@ -135,11 +124,13 @@ public class Unit {
 	public void update() {
 		draw(Cubigy.getInstance().background.getGraphics());
 		
-		if (isSelected() && Cubigy.getInstance().input.mouseEvent != null && Cubigy.getInstance().input.mouseEvent.getX() != getDisplayX() && Cubigy.getInstance().input.mouseEvent.getButton() == 3 && getTeam() == Cubigy.getInstance().team) {
-			setX(getX() + (Cubigy.getInstance().input.mouseEvent.getX() - getDisplayX()));
-			setX(getY() + (Cubigy.getInstance().input.mouseEvent.getY() - getDisplayY()));
-			setDisplayX(Cubigy.getInstance().input.mouseEvent.getX());
-			setDisplayY(Cubigy.getInstance().input.mouseEvent.getY());
+		if (isSelected() && Cubigy.getInstance().input.mouseEvent != null && Cubigy.getInstance().input.mouseEvent.getX() != getX() + GameScreen.xOffset && Cubigy.getInstance().input.mouseEvent.getButton() == 3 && getTeam() == Cubigy.getInstance().team) {
+			if (Cubigy.getInstance().currentScreen instanceof GameScreen) {
+				((GameScreen) Cubigy.getInstance().currentScreen).getClient().handler.sendPacket(new ChatPacket("Hello"));
+			}
+			
+			setX(getX() + (Cubigy.getInstance().input.mouseEvent.getX() - (getX() + GameScreen.xOffset)));
+			setY(getY() + (Cubigy.getInstance().input.mouseEvent.getY() - (getY() + GameScreen.yOffset)));
 		}
 	}
 	
@@ -147,10 +138,10 @@ public class Unit {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setColor(Cubigy.getInstance().team.getColor());
 		g2d.setStroke(new BasicStroke(10));
-		g2d.drawOval(getDisplayX(), getDisplayY(), 15, 15);
+		g2d.drawOval(getX() + GameScreen.xOffset, getY() + GameScreen.yOffset, 15, 15);
 		g2d.setStroke(new BasicStroke(1));
 		g2d.setColor(getColor());
-		g2d.fillOval(getDisplayX(), getDisplayY(), 15, 15);
+		g2d.fillOval(getX() + GameScreen.xOffset, getY() + GameScreen.yOffset, 15, 15);
 	}
 	
 	public void select() {
