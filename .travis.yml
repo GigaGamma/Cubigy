@@ -1,4 +1,0 @@
-language: java
-install: true
-sudo: false
-before_install: cd Cubigy
