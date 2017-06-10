@@ -13,7 +13,7 @@
                 <attribute name="Class-Path" value="."/>
             </manifest>
             <fileset dir="C:/Users/augus/git/Cubigy1/Cubigy/bin"/>
-            <zipfileset excludes="META-INF/*.SF" src="C:/Users/augus/Documents/jars/netty/netty-4.0.2.final.jar"/>
+            <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/netty-4.0.2.final.jar"/>
         </jar>
     </target>
 </project>
