@@ -5,6 +5,8 @@ import java.awt.Graphics;
 import com.cubigy.networking.Client;
 import com.cubigy.networking.Server;
 import com.cubigy.networking.packets.ChatPacket;
+import com.cubigy.resources.Resource;
+import com.cubigy.resources.ResourceManager;
 import com.cubigy.squares.Square;
 import com.cubigy.units.Unit;
 import com.cubigy.worlds.World;
@@ -17,6 +19,7 @@ public class GameScreen extends Screen {
 	
 	public static int xOffset = 0;
 	public static int yOffset = 0;
+	public static ResourceManager resources;
 	
 	public GameScreen(Graphics g, boolean hostLocal) {
 		super(g);
