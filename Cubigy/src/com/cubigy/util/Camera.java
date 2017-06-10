@@ -11,4 +11,9 @@ public class Camera {
 		GameScreen.yOffset += y;
 	}
 	
+	public static void moveTo(int x, int y) {
+		GameScreen.xOffset = x;
+		GameScreen.yOffset = y;
+	}
+	
 }

@@ -113,7 +113,7 @@ public class Cubigy {
 				//e.printStackTrace();
 			}
 		}
-		if (input.isKeyDown(KeyEvent.VK_ESCAPE) && Cubigy.devmode) {
+		if (input.isKeyDown(KeyEvent.VK_SPACE) && Cubigy.devmode) {
 			System.exit(0);
 		}
 		currentScreen.update();

@@ -25,7 +25,7 @@ public class Square implements Serializable {
 	private boolean selected = false;
 	private String name;
 	private TextDisplay text;
-	private Button opengui;
+	public Button opengui;
 	
 	private Team team;
 	
@@ -88,7 +88,8 @@ public class Square implements Serializable {
 	}
 	
 	public void draw(Graphics g) {
-		
+		g.setColor(Cubigy.getInstance().team.getColor());
+		g.fillRoundRect(getX() + GameScreen.xOffset, getY() + GameScreen.yOffset, 50, 50, 10, 10);
 	}
 	
 	public void onUnitInSquare() {
@@ -114,7 +115,8 @@ public class Square implements Serializable {
 		opengui.setDisplayY(getY() + GameScreen.yOffset + getText().getHeight() + 20);
 		
 		getText().draw(Cubigy.getInstance().background.getGraphics());
-		if (getTeam() == Cubigy.getInstance().team) {
+
+		if (getTeam().getName().equals(Cubigy.getInstance().team.getName())) {
 			opengui.draw(Cubigy.getInstance().background.getGraphics());
 		}
 	}

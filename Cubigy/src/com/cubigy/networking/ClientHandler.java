@@ -1,8 +1,11 @@
 package com.cubigy.networking;
 
 import com.cubigy.networking.packets.Packet;
+import com.cubigy.networking.packets.UserDataPacket;
 import com.cubigy.networking.packets.WorldPacket;
+import com.cubigy.util.Camera;
 import com.cubigy.game.Cubigy;
+import com.cubigy.game.Team;
 import com.cubigy.gui.GameScreen;
 import com.cubigy.networking.packets.ChatPacket;
 
@@ -27,6 +30,11 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 				if (Cubigy.getInstance().currentScreen instanceof GameScreen) {
 					((GameScreen) Cubigy.getInstance().currentScreen).setWorld(((WorldPacket) msg).getWorld());
 				}
+			}
+			if (msg instanceof UserDataPacket) {
+				Cubigy.getInstance().team = ((UserDataPacket) msg).getTeam();
+				
+				Camera.moveTo(-((UserDataPacket) msg).getBaseX() + Cubigy.getInstance().window.getWidth() / 2, -((UserDataPacket) msg).getBaseY() + Cubigy.getInstance().window.getHeight() / 2);
 			}
 		}
 		else {
