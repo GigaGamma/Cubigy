@@ -124,7 +124,7 @@ public class Unit implements Serializable {
 	public void update() {
 		draw(Cubigy.getInstance().background.getGraphics());
 		
-		if (isSelected() && Cubigy.getInstance().input.mouseEvent != null && Cubigy.getInstance().input.mouseEvent.getX() != getX() + GameScreen.xOffset && Cubigy.getInstance().input.mouseEvent.getButton() == 3 && getTeam() == Cubigy.getInstance().team) {
+		if (isSelected() && Cubigy.getInstance().input.mouseEvent != null && Cubigy.getInstance().input.mouseEvent.getX() != getX() + GameScreen.xOffset && Cubigy.getInstance().input.mouseEvent.getButton() == 3 && getTeam().getUniqueId().equals(Cubigy.getInstance().team.getUniqueId())) {
 			if (Cubigy.getInstance().currentScreen instanceof GameScreen) {
 				((GameScreen) Cubigy.getInstance().currentScreen).getClient().handler.sendPacket(new ChatPacket("Hello"));
 			}

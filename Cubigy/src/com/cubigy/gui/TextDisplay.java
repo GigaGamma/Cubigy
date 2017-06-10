@@ -52,7 +52,9 @@ public class TextDisplay extends Widget {
 			
 			FontRenderContext frc = new FontRenderContext(new AffineTransform(), true, true);
 			
-			w += (int)(font.getStringBounds(t, frc).getWidth());
+			if ((int)(font.getStringBounds(t, frc).getWidth()) > w) {
+				w += (int)(font.getStringBounds(t, frc).getWidth());
+			}
 			h += (int)(font.getStringBounds(t, frc).getHeight());
 		}
 		setWidth(w);

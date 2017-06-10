@@ -7,20 +7,36 @@ import java.awt.event.KeyEvent;
 
 import com.cubigy.game.Cubigy;
 import com.cubigy.gui.TextDisplay;
+import com.cubigy.units.cards.UnitCard;
 
 public class CityManagingGUI extends ManagingGUI {
 	
 	private String cityName;
+	private TextDisplay title;
 	private TextDisplay shop;
+	private TextDisplay units;
+	private UnitCard uc;
 	
 	public CityManagingGUI(String cityName) {
 		setCityName(cityName);
-		shop = new TextDisplay(getCityName() + "'s Shop", 200, 200);
-		shop.setFont(new Font("Century Gothic", Font.BOLD, 60));
+		
+		title = new TextDisplay(getCityName(), 200, 200);
+		title.setFont(new Font(title.getFont().getFontName(), Font.BOLD, 80));
+		
+		shop = new TextDisplay(getCityName() + "'s Shop", 200, 400);
+		shop.setFont(new Font(shop.getFont().getFontName(), Font.BOLD, 60));
+		
+		units = new TextDisplay("Train Units", 200, 800);
+		units.setFont(new Font(units.getFont().getFontName(), Font.BOLD, 60));
+		
+		uc = new UnitCard(200, 920);
 	}
 	
 	public void draw(Graphics g) {
+		title.draw(g);
 		shop.draw(g);
+		units.draw(g);
+		uc.draw(g);
 		ManagingGUI.setInstance(this);
 		
 		g.setColor(new Color(255, 255, 255, 150));

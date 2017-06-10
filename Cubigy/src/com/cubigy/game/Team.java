@@ -18,10 +18,13 @@ public class Team implements Serializable {
 	
 	private String name;
 	private Color color;
+	private String uniqueId;
 	
 	public Team(String name, Color color) {
 		setName(name);
 		setColor(color);
+		
+		setUniqueId(String.valueOf(color.getRed()) + String.valueOf(color.getGreen()) + String.valueOf(color.getBlue()));
 		
 		teams.add(this);
 	}
@@ -40,6 +43,14 @@ public class Team implements Serializable {
 
 	public void setColor(Color color) {
 		this.color = color;
+	}
+
+	public String getUniqueId() {
+		return uniqueId;
+	}
+
+	public void setUniqueId(String uniqueId) {
+		this.uniqueId = uniqueId;
 	}
 	
 }

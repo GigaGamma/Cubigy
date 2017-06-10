@@ -115,8 +115,8 @@ public class Square implements Serializable {
 		opengui.setDisplayY(getY() + GameScreen.yOffset + getText().getHeight() + 20);
 		
 		getText().draw(Cubigy.getInstance().background.getGraphics());
-
-		if (getTeam().getName().equals(Cubigy.getInstance().team.getName())) {
+		
+		if (getTeam().getUniqueId().equals(Cubigy.getInstance().team.getUniqueId())) {
 			opengui.draw(Cubigy.getInstance().background.getGraphics());
 		}
 	}
