@@ -9,7 +9,7 @@
         <jar destfile="${dir.jarfile}/Cubigy.jar" filesetmanifest="mergewithoutmain">
             <manifest>
                 <attribute name="Main-Class" value="com.cubigy.game.Start"/>
-                <attribute name="Class-Path" value="."/>
+                <attribute name="Class-Path" value="Cubigy"/>
             </manifest>
             <fileset dir="C:/Users/augus/git/Cubigy1/Cubigy/bin"/>
             <zipfileset excludes="META-INF/*.SF" src="${dir.buildfile}/netty-4.0.2.final.jar"/>
