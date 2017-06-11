@@ -20,19 +20,11 @@ public class UnitCard extends Card {
 	private long rtimer = 1000;
 	
 	private double price;
-	private Class<? extends Unit> unit;
-	private int unitSpawnX;
-	private int unitSpawnY;
-	private Team unitTeam;
 
-	public UnitCard(double price, int displayX, int displayY, Class<? extends Unit> unit, int unitSpawnX, int unitSpawnY, Team unitTeam) {
+	public UnitCard(double price, int displayX, int displayY) {
 		super("Unit", new String[] {"A unit that Auguste was", "too lazy to label"}, displayX, displayY);
 	
 		setPrice(price);
-		setUnit(unit);
-		setUnitSpawnX(unitSpawnX);
-		setUnitSpawnY(unitSpawnY);
-		setUnitTeam(unitTeam);
 	}
 	
 	@Override
@@ -43,12 +35,12 @@ public class UnitCard extends Card {
 		}
 		else {
 			GameScreen.resources.getGold().setAmount(GameScreen.resources.getGold().getAmount() - getPrice());
-			try {
-				getUnit().getConstructor(int.class, int.class, Team.class).newInstance(getUnitSpawnX(), getUnitSpawnY(), getUnitTeam());
-			} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | NoSuchMethodException | SecurityException e) {
-				e.printStackTrace();
-			}
+			makeUnit();
 		}
+	}
+	
+	public void makeUnit() {
+		
 	}
 	
 	@Override
@@ -65,38 +57,6 @@ public class UnitCard extends Card {
 
 	public void setPrice(double price) {
 		this.price = price;
-	}
-	
-	public Class<? extends Unit> getUnit() {
-		return unit;
-	}
-
-	public void setUnit(Class<? extends Unit> unit) {
-		this.unit = unit;
-	}
-
-	public int getUnitSpawnX() {
-		return unitSpawnX;
-	}
-
-	public void setUnitSpawnX(int unitSpawnX) {
-		this.unitSpawnX = unitSpawnX;
-	}
-
-	public int getUnitSpawnY() {
-		return unitSpawnY;
-	}
-
-	public void setUnitSpawnY(int unitSpawnY) {
-		this.unitSpawnY = unitSpawnY;
-	}
-
-	public Team getUnitTeam() {
-		return unitTeam;
-	}
-
-	public void setUnitTeam(Team unitTeam) {
-		this.unitTeam = unitTeam;
 	}
 	
 }

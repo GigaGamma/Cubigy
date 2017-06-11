@@ -127,9 +127,6 @@ public class Unit implements Serializable {
 	public void update() {
 		draw(Cubigy.getInstance().background.getGraphics());
 		
-		System.out.println(getTeam().getColor());
-		System.out.println("UNIT: " + getTeam().getUniqueId());
-		System.out.println(Cubigy.getInstance().team.getUniqueId());
 		if (isSelected() && Cubigy.getInstance().input.mouseEvent != null && Cubigy.getInstance().input.mouseEvent.getX() != getX() + GameScreen.xOffset && Cubigy.getInstance().input.mouseEvent.getButton() == 3 && getTeam().getUniqueId().equals(Cubigy.getInstance().team.getUniqueId())) {
 			System.out.println("A");
 			if (Cubigy.getInstance().currentScreen instanceof GameScreen) {

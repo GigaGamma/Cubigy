@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
+import java.util.Random;
 
 import com.cubigy.game.Cubigy;
 import com.cubigy.gui.GameScreen;
@@ -33,7 +34,21 @@ public class CityManagingGUI extends ManagingGUI {
 		units = new TextDisplay("Train Units", 200, 800);
 		units.setFont(new Font(units.getFont().getFontName(), Font.BOLD, 60));
 		
-		uc = new UnitCard(1, 200, 920, Barbarian.class, square.getX(), square.getY(), Cubigy.getInstance().team);
+		uc = new UnitCard(1, 200, 920) {
+
+			/**
+			 * @author Auguste Rame
+			 */
+			private static final long serialVersionUID = 948656322807359715L;
+			
+			@Override
+			public void makeUnit() {
+				new Barbarian(square.getX() + (-new Random().nextInt(30) + new Random().nextInt(15)), square.getY() + (-new Random().nextInt(30) + new Random().nextInt(15)), Cubigy.getInstance().team);
+				
+				super.makeUnit();
+			}
+			
+		};
 	}
 	
 	public void draw(Graphics g) {

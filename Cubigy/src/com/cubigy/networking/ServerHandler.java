@@ -53,7 +53,7 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 		world.addTileToWorld(new CitySquare("Outpost", baseX - 300, baseY, team));
 		ctx.writeAndFlush(new WorldPacket(world));
 		ResourceManager rm = new ResourceManager();
-		rm.getGold().setAmount(100);
+		rm.getGold().setAmount(5);
 		ctx.writeAndFlush(new UserDataPacket(team, baseX, baseY, rm));
 	}
 	
