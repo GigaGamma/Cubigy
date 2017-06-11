@@ -24,7 +24,7 @@ public class CapitalSquare extends Square {
 	
 	public CapitalSquare(int x, int y, Team team) {
 		super("Capital", x, y, team);
-		cmg = new CityManagingGUI("Capital");
+		cmg = new CityManagingGUI(this, "Capital");
 		
 		if (CapitalSquare.img == null) {try {CapitalSquare.img = ImageIO.read(ClassLoader.getSystemResource("images/star.png"));} catch (IOException e) {e.printStackTrace();}}
 		

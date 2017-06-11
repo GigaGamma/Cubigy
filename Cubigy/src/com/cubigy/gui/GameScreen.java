@@ -2,6 +2,7 @@ package com.cubigy.gui;
 
 import java.awt.Graphics;
 
+import com.cubigy.game.Cubigy;
 import com.cubigy.networking.Client;
 import com.cubigy.networking.Server;
 import com.cubigy.networking.packets.ChatPacket;
@@ -23,6 +24,7 @@ public class GameScreen extends Screen {
 	
 	public GameScreen(Graphics g, boolean hostLocal) {
 		super(g);
+		resources = new ResourceManager();
 		server = new Server();
 		try {
 			server.start();
@@ -35,6 +37,7 @@ public class GameScreen extends Screen {
 	
 	public GameScreen(Graphics g, String ip) {
 		super(g);
+		resources = new ResourceManager();
 		client = new Client(ip);
 		try {
 			client.start();
@@ -49,6 +52,7 @@ public class GameScreen extends Screen {
 		for (Unit u : Unit.units) {
 			u.update();
 		}
+		resources.draw(Cubigy.getInstance().background.getGraphics());
 	}
 
 	public World getWorld() {

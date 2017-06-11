@@ -1,11 +1,18 @@
 package com.cubigy.resources;
 
-public class Resource {
+import java.io.Serializable;
+
+public class Resource implements Serializable {
+	
+	/**
+	 * @author Auguste Rame
+	 */
+	private static final long serialVersionUID = -7815828974999247023L;
 	
 	private String name;
-	private int amount;
+	private double amount;
 	
-	public Resource(String name, int amount) {
+	public Resource(String name, double amount) {
 		setName(name);
 		setAmount(amount);
 	}
@@ -18,11 +25,11 @@ public class Resource {
 		this.name = name;
 	}
 
-	public int getAmount() {
+	public double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(double amount) {
 		this.amount = amount;
 	}
 	

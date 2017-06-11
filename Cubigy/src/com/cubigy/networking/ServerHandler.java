@@ -7,6 +7,7 @@ import com.cubigy.game.Team;
 import com.cubigy.networking.packets.ChatPacket;
 import com.cubigy.networking.packets.UserDataPacket;
 import com.cubigy.networking.packets.WorldPacket;
+import com.cubigy.resources.ResourceManager;
 import com.cubigy.squares.CapitalSquare;
 import com.cubigy.squares.CitySquare;
 import com.cubigy.util.ColorUtil;
@@ -51,7 +52,9 @@ public class ServerHandler extends ChannelInboundHandlerAdapter {
 		world.addTileToWorld(new CapitalSquare(baseX, baseY, team));
 		world.addTileToWorld(new CitySquare("Outpost", baseX - 300, baseY, team));
 		ctx.writeAndFlush(new WorldPacket(world));
-		ctx.writeAndFlush(new UserDataPacket(team, baseX, baseY));
+		ResourceManager rm = new ResourceManager();
+		rm.getGold().setAmount(100);
+		ctx.writeAndFlush(new UserDataPacket(team, baseX, baseY, rm));
 	}
 	
 	@Override

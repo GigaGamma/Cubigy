@@ -1,6 +1,7 @@
 package com.cubigy.networking.packets;
 
 import com.cubigy.game.Team;
+import com.cubigy.resources.ResourceManager;
 
 public class UserDataPacket extends Packet {
 
@@ -12,11 +13,13 @@ public class UserDataPacket extends Packet {
 	private Team team;
 	private int baseX;
 	private int baseY;
+	private ResourceManager resources;
 	
-	public UserDataPacket(Team team, int baseX, int baseY) {
+	public UserDataPacket(Team team, int baseX, int baseY, ResourceManager resources) {
 		setTeam(team);
 		setBaseX(baseX);
 		setBaseY(baseY);
+		setResources(resources);
 	}
 
 	public Team getTeam() {
@@ -41,6 +44,14 @@ public class UserDataPacket extends Packet {
 
 	public void setBaseY(int baseY) {
 		this.baseY = baseY;
+	}
+
+	public ResourceManager getResources() {
+		return resources;
+	}
+
+	public void setResources(ResourceManager resources) {
+		this.resources = resources;
 	}
 
 }

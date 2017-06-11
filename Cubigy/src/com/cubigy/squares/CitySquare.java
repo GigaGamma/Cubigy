@@ -28,7 +28,7 @@ public class CitySquare extends Square {
 		super("City", x, y, team);
 		
 		setCityName(cityName);
-		setCmg(new CityManagingGUI(getCityName()));
+		setCmg(new CityManagingGUI(this, getCityName()));
 		getText().setText(new String[] {getCityName(), "", "Cities are very important squares.", "They produce resources and increase a", "teams maximum population."});
 		opengui = new Button("Manage", getX() + GameScreen.xOffset + 55, getY() + GameScreen.yOffset + getText().getHeight() + 20) {
 

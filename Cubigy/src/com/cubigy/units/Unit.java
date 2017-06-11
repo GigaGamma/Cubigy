@@ -7,10 +7,13 @@ import java.awt.Graphics2D;
 import java.io.Serializable;
 import java.util.ArrayList;
 
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+
 import com.cubigy.game.Cubigy;
 import com.cubigy.game.Team;
 import com.cubigy.gui.GameScreen;
 import com.cubigy.networking.packets.ChatPacket;
+import com.cubigy.networking.packets.UnitMovementPacket;
 import com.cubigy.networking.packets.WorldPacket;
 
 public class Unit implements Serializable {
@@ -124,19 +127,23 @@ public class Unit implements Serializable {
 	public void update() {
 		draw(Cubigy.getInstance().background.getGraphics());
 		
+		System.out.println(getTeam().getColor());
+		System.out.println("UNIT: " + getTeam().getUniqueId());
+		System.out.println(Cubigy.getInstance().team.getUniqueId());
 		if (isSelected() && Cubigy.getInstance().input.mouseEvent != null && Cubigy.getInstance().input.mouseEvent.getX() != getX() + GameScreen.xOffset && Cubigy.getInstance().input.mouseEvent.getButton() == 3 && getTeam().getUniqueId().equals(Cubigy.getInstance().team.getUniqueId())) {
+			System.out.println("A");
 			if (Cubigy.getInstance().currentScreen instanceof GameScreen) {
-				((GameScreen) Cubigy.getInstance().currentScreen).getClient().handler.sendPacket(new ChatPacket("Hello"));
+				((GameScreen) Cubigy.getInstance().currentScreen).getClient().handler.sendPacket(new UnitMovementPacket(this, getX() + (Cubigy.getInstance().input.mouseEvent.getX() - (getX() + GameScreen.xOffset)), getY() + (Cubigy.getInstance().input.mouseEvent.getY() - (getY() + GameScreen.yOffset))));
 			}
 			
-			setX(getX() + (Cubigy.getInstance().input.mouseEvent.getX() - (getX() + GameScreen.xOffset)));
-			setY(getY() + (Cubigy.getInstance().input.mouseEvent.getY() - (getY() + GameScreen.yOffset)));
+			//setX(getX() + (Cubigy.getInstance().input.mouseEvent.getX() - (getX() + GameScreen.xOffset)));
+			//setY(getY() + (Cubigy.getInstance().input.mouseEvent.getY() - (getY() + GameScreen.yOffset)));
 		}
 	}
 	
 	public void draw(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.setColor(Cubigy.getInstance().team.getColor());
+		g2d.setColor(getTeam().getColor());
 		g2d.setStroke(new BasicStroke(10));
 		g2d.drawOval(getX() + GameScreen.xOffset, getY() + GameScreen.yOffset, 15, 15);
 		g2d.setStroke(new BasicStroke(1));

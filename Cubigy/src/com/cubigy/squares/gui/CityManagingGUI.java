@@ -6,7 +6,10 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 
 import com.cubigy.game.Cubigy;
+import com.cubigy.gui.GameScreen;
 import com.cubigy.gui.TextDisplay;
+import com.cubigy.squares.Square;
+import com.cubigy.units.Barbarian;
 import com.cubigy.units.cards.UnitCard;
 
 public class CityManagingGUI extends ManagingGUI {
@@ -17,7 +20,8 @@ public class CityManagingGUI extends ManagingGUI {
 	private TextDisplay units;
 	private UnitCard uc;
 	
-	public CityManagingGUI(String cityName) {
+	public CityManagingGUI(Square square, String cityName) {
+		super(square);
 		setCityName(cityName);
 		
 		title = new TextDisplay(getCityName(), 200, 200);
@@ -29,7 +33,7 @@ public class CityManagingGUI extends ManagingGUI {
 		units = new TextDisplay("Train Units", 200, 800);
 		units.setFont(new Font(units.getFont().getFontName(), Font.BOLD, 60));
 		
-		uc = new UnitCard(200, 920);
+		uc = new UnitCard(1, 200, 920, Barbarian.class, square.getX(), square.getY(), Cubigy.getInstance().team);
 	}
 	
 	public void draw(Graphics g) {

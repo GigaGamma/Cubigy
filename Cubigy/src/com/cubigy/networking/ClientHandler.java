@@ -35,6 +35,9 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 				Cubigy.getInstance().team = ((UserDataPacket) msg).getTeam();
 				
 				Camera.moveTo(-((UserDataPacket) msg).getBaseX() + Cubigy.getInstance().window.getWidth() / 2, -((UserDataPacket) msg).getBaseY() + Cubigy.getInstance().window.getHeight() / 2);
+			
+				GameScreen.resources = ((UserDataPacket) msg).getResources();
+				//System.out.println(GameScreen.resources.getGold().getAmount());
 			}
 		}
 		else {
